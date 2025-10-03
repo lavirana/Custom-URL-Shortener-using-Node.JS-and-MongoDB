@@ -10,6 +10,16 @@ if(!user) return res.redirect("/login");
 
 }
 
+
+async function checkAuth(req, res, next){
+  const userUid = req.cookies?.uid;
+  const user = getUserBySessionId(userUid);
+    req.user = user;
+    next();
+
+}
+
 module.exports  = {
     restrictToLoggedinUserOnly,
+    checkAuth
 }
